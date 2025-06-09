@@ -1,0 +1,21 @@
+<!-- complaints/templates/update_status.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Complaint Status</title>
+</head>
+<body>
+    <h2>Update Status for: {{ complaint.title }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label>Status:</label><br>
+        <select name="status">
+            <option value="Pending" {% if complaint.status == "Pending" %}selected{% endif %}>Pending</option>
+            <option value="In Progress" {% if complaint.status == "In Progress" %}selected{% endif %}>In Progress</option>
+            <option value="Resolved" {% if complaint.status == "Resolved" %}selected{% endif %}>Resolved</option>
+        </select><br><br>
+        <button type="submit">Update</button>
+    </form>
+    <p><a href="{% url 'dashboard' %}">Back to Dashboard</a></p>
+</body>
+</html>

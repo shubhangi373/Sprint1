@@ -1,0 +1,27 @@
+<!-- complaints/templates/dashboard.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, {{ user.username }}</h2>
+    <p><a href="{% url 'submit_complaint' %}">Submit a Complaint</a> | <a href="{% url 'logout' %}">Logout</a></p>
+
+    <h3>Your Complaints:</h3>
+    <ul>
+        {% for complaint in complaints %}
+            <li>
+                <strong>{{ complaint.title }}</strong><br>
+                {{ complaint.description }}<br>
+                Status: {{ complaint.status }}<br>
+                {% if user.is_staff %}
+                    <a href="{% url 'update_status' complaint.id %}">Update Status</a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No complaints found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
